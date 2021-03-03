@@ -95,7 +95,7 @@ input {
   width: 100%;
   font-weight: bold;
 }
-.collection lis{
+.collection li{
   display: block;
   padding: 0 1rem;
   /* margin-bottom: 1rem; */

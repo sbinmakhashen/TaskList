@@ -15,6 +15,8 @@ function loadEventListeners() {
   taskList.addEventListener('click', remove);
   // making the clear btn work
   clearBtn.addEventListener('click', clear);
+  // filter tasks
+  filter.addEventListener('keyup', filterTask);
 }
 
 // adding tasks function 
@@ -23,7 +25,7 @@ function addTask(e) {
     alert("Add a task first!!");
   }
   // Create the li tag
-  const li = document.createElement('lis');
+  const li = document.createElement('li');
   // creating the class of the li
   li.className = 'lis';
   // creating a text node and append it to the li
@@ -45,9 +47,31 @@ function addTask(e) {
 }
 
 // removing tasks by icon button
+function remove(e) {
+  // getting the aTag
+  if (e.target.parentElement.classList.contains('delete-item')) {
+    // removing the li by clicking on the aTag
+    e.target.parentElement.parentElement.remove();
+  }
+}
 
 // clear button function
 function clear(e) {
-
+  // clearing the tasks in ul
+  taskList.innerHTML = '';
   e.preventDefault();
+}
+
+// filtering the tasks
+function filterTask(e) {
+  const text = e.target.value.toLowerCase();
+  // selecting all of the items that are in class of lis
+  document.querySelectorAll('.lis').forEach(function (task) {
+    const liItem = task.firstChild.textContent;
+    if (liItem.toLowerCase().indexOf(text) != -1) {
+      task.style.display = 'block';
+    } else {
+      task.style.display = 'none';
+    }
+  });
 }
